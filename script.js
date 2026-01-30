@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // CONFIGURATION
     // REPLACE THIS WITH YOUR ACTUAL N8N WEBHOOK URL
-    const N8N_WEBHOOK_URL = 'https://YOUR_N8N_INSTANCE_URL/webhook/travel-itinerary-generator';
+    const N8N_WEBHOOK_URL = 'https://sibiraj.app.n8n.cloud/webhook/3311f922-2a51-4534-9bab-02ac643c80f0';
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -77,3 +77,4 @@ document.addEventListener('DOMContentLoaded', () => {
         messageArea.classList.add(type);
     }
 });
+
