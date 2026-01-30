@@ -1,0 +1,95 @@
+{
+  "name": "Travel Itinerary Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "travel-itinerary-generator",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are an expert travel planner. Create a detailed day-by-day travel itinerary based on the user's request. Format the output in clean HTML suitable for an email body."
+            },
+            {
+              "role": "user",
+              "content": "=Destination: {{$json.destination}}\nDuration: {{$json.days}} days\nTravelers: {{$json.travelers}}\nBudget: {{$json.budget}}\nMode: {{$json.mode}}\nPreferences: {{$json.preferences}}\n\nPlease provide:\n1. A day-wise travel plan.\n2. Suggested activities.\n3. Estimated costs for activities.\n4. Important travel considerations for this destination."
+            }
+          ]
+        }
+      },
+      "name": "OpenAI Chat Model",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "travel-planner@wanderlust.ai",
+        "toEmail": "={{$node[\"Webhook\"].json[\"email\"]}}",
+        "subject": "Your Dream Trip to {{$node[\"Webhook\"].json[\"destination\"]}} - Itinerary Inside!",
+        "html": "={{$json.content}}",
+        "options": {}
+      },
+      "name": "Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Chat Model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderLust AI - Your Personal Travel Planner</title>
+    <meta name="description"
+        content="Generate personalized travel itineraries with AI. Plan your perfect trip in seconds.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <header>
+            <h1>WanderLust AI</h1>
+            <p>Design your dream journey with the power of AI</p>
+        </header>
+
+        <main>
+            <form id="itineraryForm">
+                <div class="form-group">
+                    <label for="destination">Where strictly do you want to go?</label>
+                    <input type="text" id="destination" name="destination" placeholder="e.g., Paris, Tokyo, Bali"
+                        required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="days">Duration (Days)</label>
+                        <input type="number" id="days" name="days" min="1" max="30" placeholder="e.g., 5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelers">Travelers</label>
+                        <input type="number" id="travelers" name="travelers" min="1" placeholder="e.g., 2" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="budget">Budget (USD)</label>
+                        <select id="budget" name="budget" required>
+                            <option value="" disabled selected>Select Budget</option>
+                            <option value="Budget">Budget ($0 - $1000)</option>
+                            <option value="Moderate">Moderate ($1000 - $3000)</option>
+                            <option value="Luxury">Luxury ($3000+)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mode">Travel Mode</label>
+                        <select id="mode" name="mode" required>
+                            <option value="" disabled selected>Preferred Mode</option>
+                            <option value="Flight">Flight</option>
+                            <option value="Train">Train</option>
+                            <option value="Bus">Bus</option>
+                            <option value="Car">Car</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="preferences">Additional Preferences (Optional)</label>
+                    <textarea id="preferences" name="preferences" rows="3"
+                        placeholder="e.g., Vegetarian food, historical sites, no hiking..."></textarea>
+                </div>
+
+                <button type="submit" id="generateBtn">
+                    <span class="btn-text">Generate Itinerary</span>
+                    <span class="loader hidden"></span>
+                </button>
+            </form>
+
+            <div id="messageArea" class="hidden"></div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 WanderLust AI. Built with Cursor & n8n.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
